@@ -1,0 +1,22 @@
+問１
+ルートブリッジ：switch3
+
+問２ 
+ポートの役割
+ルートポート（RP）：switch１のF0/2,switch2のF0/1,switch4のE0/2
+理由：switch1,switch2間はポートの速度が100Mbps,switch2,switch４間は10Mbps,switch4,switch3間は10Mbps,switch3,switch1間は10Mbpsのため、ショートパスコストはそれぞれ19,100,100,100となる。ルートパスコストの値が小さいものがルートポートになるため、以下の計算により、答えは上記となる。
+
+switch1-switch3:100　F0/2
+switch1-switch2-switch4-switch3:219　F0/1 ×
+
+switch2-switch1-switch3:119 F0/1
+switch2-switch4-switch3:200 F0/2 ×
+
+switch4-switch2-switch1-switch3:219　×
+switch4-switch3:100
+
+指定ポート（DP）:switch3のE0/1,E0/2,switch1のF0/1,switch4のE0/1
+理由：ルートブリッジの全てのポートは指定ポートになるため、switch3のポートは指定ポートである。また、ルートポートの対向ポートは必ず指定ポートになるため、switch1のF0/1は指定ポートとなる。最後に、各コリジョンドメインに指定ポートは一つ存在するが、switch2とswitch4の間には何の役割も割り振られていないため、ブリッジプライオリティの値が小さいswitch4のE0/1が指定ポートとなる。
+
+ブロッキングポート（BP）:switch2のF0/2
+理由：以上の計算により、ルートポート、指定ポートのどちらにも選出されなかったswitch2のF0/2がブロッキングポートとなる。
